@@ -7,18 +7,19 @@ private:
     double eps;
 
 private:
-    double a, b, root;
+    double a, b, root, itr;
 
 public:
     FalsePosition()
     {
-        a = 0, b = 0, root = -1, eps = 0.0000000001;
+        a = 0, b = 0, root = -1, eps = 0.0000000001, itr = 1;
+        
     }
 
 public:
     double f(double x)
     {
-        return x * x * x - x * x + 2;
+        return x * x * x - 2 * x * x + 3 * x - 5.0;
     }
 
 public:
@@ -33,7 +34,7 @@ public:
         do
         {
             a--, b++;
-        } while (f(a) * f(b) > 0);
+        } while (f(a) * f(b) >= 0);
 
         if (f(b) < 0)
             swap(a, b);
@@ -50,17 +51,18 @@ public:
 public:
     void findRoot()
     {
+        //cout<<"HI"<<endl;
         findInterval();
-        double mid = getNext(a, b);
-        // Driver program to test above function 
-        while (abs(f(b) - f(a)) > eps)
+        double mid = getNext(a, b);        
+        // Driver program to test above function
+        while (abs(f(b) - f(a)) > eps && itr != 1000000)
         {            
             if(f(mid) == 0) break;
             else if (f(mid)*f(a)<0) b = mid;
             else a = mid;
-            mid = getNext(a, b);
+            itr++;
+            mid = getNext(a, b);                        
         }
-
         root = mid;
     }
 };
