@@ -4,7 +4,7 @@ using namespace std;
 class NewtonDividedDifference
 {
 private:
-    double x[10], y[10][10], result, term;
+    double x[10], y[10][10], result, term, pro,;
 
 private:
     int n, i, j, k, f, m;
@@ -29,7 +29,7 @@ public:
     // Function to find the product term
     double proterm(int i, float value)
     {
-        float pro = 1;
+        pro = 1;
         for (int j = 0; j < i; j++)
         {
             pro = pro * (value - x[j]);
@@ -55,7 +55,7 @@ public:
 public:    
     float applyFormula(double value, int n)
     {
-        float sum = y[0][0];
+        sum = y[0][0];
 
         for (int i = 1; i < n; i++)
         {
