@@ -10,7 +10,7 @@ class NewtonRaphson
 
     public: NewtonRaphson()
     {        
-        root = 3;
+        root = rand() % 10;
 
     }
 
