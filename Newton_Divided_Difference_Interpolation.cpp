@@ -4,7 +4,7 @@ using namespace std;
 class NewtonDividedDifference
 {
 private:
-    double x[10], y[10][10], result, term, pro,;
+    double x[10], y[10][10], result, term, pro,sum;
 
 private:
     int n, i, j, k, f, m;
