@@ -8,7 +8,9 @@ class Secant
 
     public: Secant()
     {
-        a = 7, b = 8, root = -1;
+        a = rand() % 100;
+        b = rand() % 100;
+        root = -1;       
     }
 
     public: double f(double x)
