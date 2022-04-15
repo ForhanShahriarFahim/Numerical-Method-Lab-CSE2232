@@ -2,76 +2,50 @@
 
 using namespace std;
 
-class Point
-{
-public:
-    double x;
-    double y;
-
-    Point(double x, double y)
-    {
-        this->x = x;
-        this->y = y;
-    }
-};
-
 class Trapezoidal
 {
 private:
-    double high, low;
-    int h;
-    vector<Point> points;
+    double a, b, sum,h;
+    int n;    
 
-    double f(double x)
+private:
+    double function(double x)
     {
-        return x * sin(x);
-    }
 
-    void make_points()
-    {
-        double width = (high - low) / h;
-        // cout<<width<<endl;
-
-        for (int i = 0; i <= h; i++)
-        {
-            double x = low + i * width;
-            double y = f(x);
-            points.push_back(Point(x, y));
-            //cout<<x<<" "<<y<<endl;
-        }
+        return 1 / (1 + x * x);
     }
 
 public:
-    Trapezoidal(double high, double low, int h)
+    Trapezoidal()
     {
-        this->high = high;
-        this->low = low;
-        this->h = h;
-    }
-
-    void solve()
+        a = 0, b = 0, sum = 0, h = 0;
+    }    
+public: 
+    double solve(double b, double a, int n)
     {
-        make_points();
-        double h = abs(points[0].x - points[1].x);
-        double res = 0;
+        this->a = a;
+        this->b = b;
+        this->n = n;
+          
+        h = (b - a) / n;
+        //cout<<"h="<<h<<endl;
+        // Computing sum of first and last terms
+        sum = function(a) + function(b);
 
-        for (int i = 1; i < points.size() - 1; i++)
+        // Adding middle terms
+        for (int i = 1; i < n; i++)
         {
-            res += h * points[i].y;
+            sum += 2 * function(a + i * h);
         }
 
-        res += h / 2 * (points[0].y + points[points.size() - 1].y);
-
-        cout << res << endl;
+        return (h / 2) * sum;
     }
 };
 
 int main()
 {
 
-    Trapezoidal *tz = new Trapezoidal(3.1416, 0, 5);
-
-    tz->solve();
-
+    Trapezoidal trapezoidal;
+    printf("Value of integral is %6.4f\n",trapezoidal.solve(1,0,100));
     return 0;
 }
