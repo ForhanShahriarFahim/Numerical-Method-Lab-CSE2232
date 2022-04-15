@@ -16,17 +16,16 @@ private:
     }
 
 public:
-    Trapezoidal()
-    {
-        a = 0, b = 0, sum = 0, h = 0;
-    }    
-public: 
-    double solve(double b, double a, int n)
+    Trapezoidal(double b, double a, int n)
     {
         this->a = a;
         this->b = b;
         this->n = n;
-          
+    }    
+public: 
+    double solve()
+    {  
+
         h = (b - a) / n;
         //cout<<"h="<<h<<endl;
         // Computing sum of first and last terms
@@ -45,7 +44,7 @@ public:
 int main()
 {
 
-    Trapezoidal trapezoidal;
-    printf("Value of integral is %6.4f\n",trapezoidal.solve(1,0,100));
+    Trapezoidal *trapezoidal = new Trapezoidal(1, 0, 10);
+    printf("Value of integral is %6.4f\n",trapezoidal->solve());
     return 0;
 }
