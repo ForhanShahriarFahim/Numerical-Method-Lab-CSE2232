@@ -7,25 +7,18 @@ private:
     double eps;
 
 private:
-    double a, b, root, itr;
+    double a, b, root, xa, xb, epsr, xrp, xr;
 
 public:
     FalsePosition()
     {
-        a = 0, b = 0, root = -1, eps = 0.0000000001, itr = 1;
-        
+        a = 0, b = 0, root = -1, eps = 0.0000000001, xrp = 10, epsr = 10; // Initialize all variables
     }
 
 public:
-    double f(double x)
+    double equation(double x)
     {
-        return x * x * x - 2 * x * x + 3 * x - 5.0;
-    }
-
-public:
-    double getNext(double x0, double x1)
-    {
-        return (x0*f(x1) - x1*f(x0)) / (f(x1) - f(x0));
+        return x * x * x - 2 * x - 5;
     }
 
 public:
@@ -33,13 +26,18 @@ public:
     {
         do
         {
-            a--, b++;
-        } while (f(a) * f(b) >= 0);
+            a = rand() % 10;
+            b = rand() % 10;
 
-        if (f(b) < 0)
+            if (rand() % 2)
+                a *= -1;
+            if (rand() % 2)
+                b *= -1;
+
+        } while (equation(a) * equation(b) > 0);
+
+        if (a > b)
             swap(a, b);
-
-        return;
     }
 
 public:
@@ -53,17 +51,31 @@ public:
     {
         //cout<<"HI"<<endl;
         findInterval();
-        double mid = getNext(a, b);        
-        // Driver program to test above function
-        while (abs(f(b) - f(a)) > eps && itr != 1000000)
-        {            
-            if(f(mid) == 0) break;
-            else if (f(mid)*f(a)<0) b = mid;
-            else a = mid;
-            itr++;
-            mid = getNext(a, b);                        
-        }
-        root = mid;
+        cout << a << " " << b << endl;
+
+        
+        xa = a;
+        xb = b;
+
+        do
+        {
+            xr = xa - (xb - xa) * equation(xa) / (equation(xb) - equation(xa));
+
+            if (equation(xr) == 0)
+                break;
+
+            if (equation(xr) > 0)
+                xb = xr;
+            else
+                xa = xr;
+
+            //cout << xa << " " << xb << endl;
+
+            epsr = abs((xr - xrp) / xr);
+            xrp = xr;
+
+        } while (epsr > eps);
+        root = xr;
     }
 };
 
