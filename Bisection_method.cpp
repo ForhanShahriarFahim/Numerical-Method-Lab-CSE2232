@@ -7,18 +7,18 @@ private:
     double eps;
 
 private:
-    double a, b, root;
+    double a, b, root, xa, xb, epsr, xrp, xr;
 
 public:
     Bisection()
     {
-        a = 0, b = 0, root = -1, eps = 0.0000000001;
+        a = 0, b = 0, root = -1, eps = 0.0000000001, xrp = 10, epsr = 1;   //Initialize all variables     
     }
 
 public:
-    double f(double x)
+    double equation(double x)
     {
-        return x *x *x - x *x + 2;
+        return x * x * x - 2 * x - 5;
     }
 
 public:
@@ -26,10 +26,18 @@ public:
     {
         do
         {
-            a--, b++;
-        } while (f(a) * f(b) > 0);
+            a = rand() % 10;
+            b = rand() % 10;
 
-        if (f(b) < 0)
+            if (rand() % 2)
+                a *= -1;
+
+            if (rand() % 2)
+                b *= -1;
+
+        } while (equation(double(a)) * equation(double(b)) > 0);
+
+        if (a > b)
             swap(a, b);
 
         return;
@@ -44,19 +52,30 @@ public:
 public:
     void findRoot()
     {
-        findInterval();
-        double mid = (a + b) / 2;
+        findInterval();        
 
-        while (abs(f(b) - f(a)) > eps)
+        double xa = a;
+        double xb = b;
+        cout << xa << " " << xb << endl;     //Randomly generated interval range   
+
+        do
         {
-            if (f(mid) > 0)
-                b = mid;
-            else
-                a = mid;
-            mid = (a + b) / 2;
-        }
+            xr = (xa + xb) / 2;
 
-        root = mid;
+            if (equation(xr) == 0)
+                break;
+
+            else if (equation(xr) > 0)
+                xb = xr;
+            else
+                xa = xr;
+
+            epsr = abs((xr - xrp) / xr); //relative error
+            xrp = xr;//previous root
+
+        } while (epsr > eps);
+
+        root = xr;
     }
 };
 
