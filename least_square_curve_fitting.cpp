@@ -14,7 +14,7 @@ public:
         
         this->x = x;
         this->y = y;
-        cout<<"x="<<x<<"y="<<y<<endl;
+        //cout<<"x="<<x<<"y="<<y<<endl;
     }
 };
 class curve_fitting_least_square
