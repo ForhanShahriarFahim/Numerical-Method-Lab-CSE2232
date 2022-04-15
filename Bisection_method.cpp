@@ -12,7 +12,7 @@ private:
 public:
     Bisection()
     {
-        a = 0, b = 0, root = -1, eps = 0.0000000001, xrp = 10, epsr = 1;   //Initialize all variables     
+        a = 0, b = 0, root = -1, xrp = 10, epsr = 1; // Initialize all variables
     }
 
 public:
@@ -50,13 +50,13 @@ public:
     }
 
 public:
-    void findRoot()
+    void findRoot(double eps)
     {
-        findInterval();        
+        findInterval();
 
         double xa = a;
         double xb = b;
-        cout << xa << " " << xb << endl;     //Randomly generated interval range   
+        cout << xa << " " << xb << endl; // Randomly generated interval range
 
         do
         {
@@ -70,8 +70,8 @@ public:
             else
                 xa = xr;
 
-            epsr = abs((xr - xrp) / xr); //relative error
-            xrp = xr;//previous root
+            epsr = abs((xr - xrp) / xr); // relative error
+            xrp = xr;                    // previous root
 
         } while (epsr > eps);
 
@@ -82,6 +82,6 @@ public:
 int main()
 {
     Bisection bisection;
-    bisection.findRoot();
+    bisection.findRoot(.00001);
     printf("The root of the given equation : %0.10lf\n", bisection.getRoot());
 }

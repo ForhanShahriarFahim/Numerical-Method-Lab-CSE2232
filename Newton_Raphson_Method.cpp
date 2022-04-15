@@ -9,20 +9,19 @@ class NewtonRaphson
     private: double root;
 
     public: NewtonRaphson()
-    {
-        eps = 0.0000000001;
+    {        
         root = 3;
 
     }
 
-    public: double f(double x)
+    public: double equation(double x)
     {
-        return x * x * x - x * x + 2;
+        return x * x * x - 2 * x - 5;
     }
 
     public: double ddxf(double x)
     {
-        return 3 * x * x - 2 * x;
+        return 3 * x * x - 2;
     }
 
     public : double getRoot()
@@ -30,16 +29,16 @@ class NewtonRaphson
         return root;
     }
 
-    public: void findRoot()
+    public: void findRoot(double eps)
     {
-        while(abs(f(root))>eps)
-            root = root - (f(root)/ddxf(root));
+        while(abs(equation(root))>eps)
+            root = root - (equation(root)/ddxf(root));
     }
 };
 
 int main()
 {
     NewtonRaphson newtonRaphson;
-    newtonRaphson.findRoot();
+    newtonRaphson.findRoot(0.0001);
     printf("The root of the given equation : %0.10lf\n", newtonRaphson.getRoot());
 }

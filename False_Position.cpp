@@ -12,7 +12,7 @@ private:
 public:
     FalsePosition()
     {
-        a = 0, b = 0, root = -1, eps = 0.0000000001, xrp = 10, epsr = 10; // Initialize all variables
+        a = 0, b = 0, root = -1, xrp = 10, epsr = 10; // Initialize all variables
     }
 
 public:
@@ -47,7 +47,7 @@ public:
     }
 
 public:
-    void findRoot()
+    void findRoot(double eps)
     {
         //cout<<"HI"<<endl;
         findInterval();
@@ -82,6 +82,6 @@ public:
 int main()
 {
     FalsePosition falsePosition;
-    falsePosition.findRoot();
+    falsePosition.findRoot(0.00001);
     printf("The root of the given equation : %0.10lf\n", falsePosition.getRoot());
 }
