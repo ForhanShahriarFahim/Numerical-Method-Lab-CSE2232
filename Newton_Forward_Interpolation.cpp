@@ -2,6 +2,7 @@
 using namespace std;
 
 
+
 class Newton_Forward_Interpolation
 {
     private: double x[10],y[10][10],sum,p,u,temp,value;
@@ -125,3 +126,19 @@ int main()
     obj.getDifferenceTable(n);
     return 0;
 }
+
+/*p=x-x0/x1-x0 
+
+y(x)=y0+pΔy0+
+p(p-1)
+2!
+ 
+⋅Δ2y0+
+p(p-1)(p-2)
+3!
+ 
+⋅Δ3y0+
+p(p-1)(p-2)(p-3)
+4!
+ 
+⋅Δ4y0+...*/

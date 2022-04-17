@@ -7,9 +7,9 @@ class NewtonRaphson
 {
     private: double eps;
     private: double root;
-
     public: NewtonRaphson()
-    {        
+    {
+        srand((int)time(0));
         root = rand() % 10;
 
     }

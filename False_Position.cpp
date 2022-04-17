@@ -1,3 +1,4 @@
+// The Method of Chords.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -59,8 +60,8 @@ public:
 
         do
         {
-            xr = xa - (xb - xa) * equation(xa) / (equation(xb) - equation(xa));
-
+            //xr = xa - (xb - xa) * equation(xa) / (equation(xb) - equation(xa));
+            xr = (xa*equation(xb) - xb*equation(xa)) / (equation(xb) - equation(xa));
             if (equation(xr) == 0)
                 break;
 

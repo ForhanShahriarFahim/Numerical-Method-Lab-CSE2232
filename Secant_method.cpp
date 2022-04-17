@@ -4,13 +4,16 @@ using namespace std;
 class Secant
 {
     private: double eps;
-    private: double a, b, root;
+    private: double a, b, root, x0, x1;
 
     public: Secant()
     {
+        srand((int)time(0));
         a = rand() % 100;
         b = rand() % 100;
-        root = -1;       
+        root = 0;
+        x0 = 5;
+        x1 = 10;       
     }
 
     public: double f(double x)
@@ -26,11 +29,11 @@ class Secant
     public: void findRoot(double eps)
     {
         do{
-            root = b - (f(b) * (b-a))/(f(b) - f(a));
-            a = b;
-            b = root;
-
-        }while(abs(f(root))>eps);
+            double x2 = ((x0 * f(x1)) - (x1 * f(x0))) / (f(x1) - f(x0));
+            x0 = x1;
+            x1 = x2;
+            root = x2;
+        }while(abs(x1 - x0)>=eps);
     }
 };
 

@@ -18,13 +18,12 @@ public:
 public:
     double equation(double x)
     {
-        return x * x * x - 2 * x - 5;
+        return x * x  + 5 * x + 6;
     }
 
 public:
     void findInterval()
-    {
-        do
+    {        
         {
             a = rand() % 10;
             b = rand() % 10;
@@ -80,7 +79,7 @@ public:
 };
 
 int main()
-{
+{    
     Bisection bisection;
     bisection.findRoot(.00001);
     printf("The root of the given equation : %0.10lf\n", bisection.getRoot());
